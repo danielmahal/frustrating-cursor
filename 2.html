@@ -1,0 +1,29 @@
+<title>Frustrating Cursor</title>
+<script>
+  var mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  var cursor = new Image();
+
+  cursor.src = 'normal.png';
+  cursor.style.position = 'absolute';
+
+  function render(time) {
+    requestAnimationFrame(render);
+
+    var x = mouse.x + Math.sin(time / 300) * 100;
+    var y = mouse.y + Math.cos(time / 323) * 100;
+
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+  }
+
+  window.addEventListener('mousemove', function(event) {
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+  });
+
+  window.addEventListener('load', function() {
+    document.body.appendChild(cursor);
+    document.body.style.cursor = 'url(blank.png), pointer';
+    render(0);
+  });
+</script>
